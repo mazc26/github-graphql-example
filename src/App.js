@@ -9,8 +9,12 @@ function App() {
   const { loading, error, data } = useQuery(FETCH_USERS);
 
   if (loading) return "Loading...";
+  if (error) return <p>{error.extraInfo}</p>;
+
   return (
-    <Grid container style={{ padding: 20 }}>
+    /**TODO send isFirst or isLast item depending on index of the array to fix some styling and borders on the RepositoryList Component */
+    <Grid container style={{ padding: 20, fontWeight: "bold" }}>
+      <Grid style={{ marginBottom: 20 }}>Repositories:</Grid>
       {data?.organization?.repositories?.nodes?.map((item) => (
         <RepositoryListItem item={item} />
       ))}
